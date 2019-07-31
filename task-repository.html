@@ -37,7 +37,7 @@
        };
      }
      static get observers(){
-       return ['_hasPaginationChanged(this.offset, this.limit)'];
+       return ['getPage(offset, limit)'];
      }
      constructor(){
        super();
@@ -165,10 +165,6 @@
              done: false
            }
          ];
-     }
-
-     _hasPaginationChanged(offset, limit){
-       getPage();
      }
 
      getPage(){

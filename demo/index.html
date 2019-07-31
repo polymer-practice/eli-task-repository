@@ -29,12 +29,14 @@
           <task-repository
             id="task-repo"
             limit=5
-            offset=10
+            offset=0
           ></task-repository>
           <script>
            const repo = document.getElementById('task-repo');
            const offsetInput = document.getElementById('offset-input');
+           offsetInput.value = 0;
            const limitInput = document.getElementById('limit-input');
+           limitInput.value = 5;
            setTimeout(()=>{
              repo.addEventListener('page-event', (event) => {
                console.log(event.detail);
@@ -44,10 +46,10 @@
              repo.getPage();
            }, 1000);
            function offsetChanged(offset){
-             repo.offset = offset;
+             repo.offset = Number(offset);
            }
            function limitChanged(limit){
-             repo.limit = limit;
+             repo.limit = Number(limit);
            }
           </script>
         </template>
