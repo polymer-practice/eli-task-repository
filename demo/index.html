@@ -41,6 +41,9 @@
            limitInput.value = 5;
            const taskInput = document.getElementById('task-input');
            setTimeout(()=>{
+             repo.addEventListener('task-created', (event)=>{
+               repo.getPage();
+             });
              repo.addEventListener('page-event', (event) => {
                console.log(event.detail);
                offsetInput.value = event.detail.offset;

@@ -176,6 +176,13 @@
        }
        this.list = [t, ...this.list];
        console.log(this.list);
+       const pageEvent = new CustomEvent(
+         'task-created',
+         {
+           bubbles: true,
+           composed: true,
+         });
+       setTimeout(() => this.dispatchEvent(pageEvent), 300);
      }
 
      getPage(){
