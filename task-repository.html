@@ -22,6 +22,10 @@
      static get is() { return 'task-repository'; }
      static get properties() {
        return {
+         updateTask:{
+           type: Object,
+           observer: 'updateTask'
+         },
          newTask:{
            type: Object,
            observer: 'insertNewTask'
@@ -165,7 +169,18 @@
            }
          ];
      }
-
+     updateTask (task){
+       if(!task) return;
+       this.list[task.id] = task;
+       console.log(this.list);
+       const updateEvent = new CustomEvent(
+         'task-updated',
+         {
+           bubbles: true,
+           composed: true,
+         });
+       setTimeout(() => this.dispatchEvent(updateEvent), 300);
+     }
      insertNewTask(task){
        if(!task) return;
        const t = {
@@ -176,13 +191,13 @@
        }
        this.list = [t, ...this.list];
        console.log(this.list);
-       const pageEvent = new CustomEvent(
+       const createEvent = new CustomEvent(
          'task-created',
          {
            bubbles: true,
            composed: true,
          });
-       setTimeout(() => this.dispatchEvent(pageEvent), 300);
+       setTimeout(() => this.dispatchEvent(createEvent), 300);
      }
 
      getPage(){

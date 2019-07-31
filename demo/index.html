@@ -28,6 +28,8 @@
           <input id="limit-input" type="number" value=0 onchange="limitChanged(value)"/>
           <h3>Create task</h3>
           <input id="task-input" type="text" onblur="createTask(value)"/>
+          <h3>Update task id</h3>
+          <input id="id-input" type="number" onblur="updateTask(value)"/>
           <task-repository
             id="task-repo"
             limit=5
@@ -40,10 +42,15 @@
            const limitInput = document.getElementById('limit-input');
            limitInput.value = 5;
            const taskInput = document.getElementById('task-input');
+           const idInput = document.getElementById('id-input');
            setTimeout(()=>{
-             repo.addEventListener('task-created', (event)=>{
+             repo.addEventListener('task-created', (event) => {
                repo.getPage();
              });
+             repo.addEventListener('task-updated', (event) => {
+               console.log('The task has been updated');
+               repo.getPage();
+             })
              repo.addEventListener('page-event', (event) => {
                console.log(event.detail);
                offsetInput.value = event.detail.offset;
@@ -65,6 +72,15 @@
                cancelled: false
              }
              repo.newTask = t;
+           }
+           function updateTask(value){
+             const t = {
+               id: Number(value),
+               title: 'task updated',
+               cancelled: false,
+               done: false
+             }
+             repo.updateTask = t;
            }
           </script>
         </template>
