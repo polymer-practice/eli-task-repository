@@ -7,7 +7,6 @@
        display: block;
      }
     </style>
-    <h2>Hello [[prop1]]!</h2>
   </template>
 
   <script>
@@ -36,6 +35,9 @@
            value: 3
          }
        };
+     }
+     static get observers(){
+       return ['_hasPaginationChanged(this.offset, this.limit)'];
      }
      constructor(){
        super();
@@ -163,6 +165,10 @@
              done: false
            }
          ];
+     }
+
+     _hasPaginationChanged(offset, limit){
+       getPage();
      }
 
      getPage(){
