@@ -24,11 +24,11 @@
        return {
          updateTask:{
            type: Object,
-           observer: 'updateTask'
+           observer: '_updateTask'
          },
          newTask:{
            type: Object,
-           observer: 'insertNewTask'
+           observer: '_insertNewTask'
          },
          offset: {
            type: Number,
@@ -169,7 +169,7 @@
            }
          ];
      }
-     updateTask (task){
+     _updateTask (task){
        if(!task) return;
        this.list[task.id] = task;
        console.log(this.list);
@@ -181,7 +181,7 @@
          });
        setTimeout(() => this.dispatchEvent(updateEvent), 300);
      }
-     insertNewTask(task){
+     _insertNewTask(task){
        if(!task) return;
        const t = {
          id: this.list.length,
