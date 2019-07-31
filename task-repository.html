@@ -171,7 +171,10 @@
      }
      _updateTask (task){
        if(!task) return;
-       this.list[task.id] = task;
+       const t  = this.list.find((item) => {
+         return item.id === task.id;
+       });
+       Object.assign(t, task);
        console.log(this.list);
        const updateEvent = new CustomEvent(
          'task-updated',
